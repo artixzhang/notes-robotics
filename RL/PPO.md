@@ -178,18 +178,18 @@ $$
 PPO 的总 Loss 计算公式为:
 
 $$
-L^\text{PPO} = L^\text{CLIP}(\theta) - c_1L^\text{VF}(w) + c_2S[\pi_{\theta}](s_t)
+L^\text{PPO} = L^\text{CLIP}(\theta) - c_1L^\text{VF}(w) + c_2 S[ \pi_{\theta} ](s_t)
 $$
 
 其中,
 - 策略裁剪损失 $L^\text{CLIP}(\theta)$ 代表 Actor Loss. 希望 Clip 的带截断得分最高, 因此该项为正.
 - 价值函数损失 $L^\text{VF}(\theta)$ 代表 Critic Loss. 希望均方误差最小, 因此该项为负.
-- 熵正则化项 $S[\pi_{\theta}](s_t)$ 代表熵, 鼓励策略保持探索, 防止过早陷入局部最优. 希望熵增大, 从而鼓励探索, 因此该项为正.
+- 熵正则化项 $S[ \pi_{\theta} ](s_t)$ 代表熵, 鼓励策略保持探索, 防止过早陷入局部最优. 希望熵增大, 从而鼓励探索, 因此该项为正.
 
 上述公式实际是总体目标得分, 而不是总体损失, 因为 RL 的目标是使得分最高, 而通常不是损失最低, 在训练时整体取负号变为损失.
 
 $$
-\text{Total\_Loss} = -L^\text{CLIP}(\theta) + c_1L^\text{VF}(w) - c_2S[\pi_{\theta}](s_t)
+\text{Total\_Loss} = -L^\text{CLIP}(\theta) + c_1L^\text{VF}(w) - c_2 S[ \pi_{\theta} ](s_t)
 $$
 
 对于正态分布, 熵只与标准差相关, 而正态分布的熵 $S=\ln(\sigma \sqrt{2\pi e})$ . 通过在总体得分中引入 $S$ , 可以间接控制系统保持输出较大的标准差.
